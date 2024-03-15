@@ -1,38 +1,47 @@
-# Remix
+# templates/spa
 
-This directory is a brief example of a [Remix](https://remix.run/docs) site that can be deployed to Vercel with zero configuration.
+This template leverages [Remix SPA Mode](https://remix.run/docs/en/main/future/spa-mode) and the [Remix Vite Plugin](https://remix.run/docs/en/main/future/vite) to build your app as a Single-Page Application using [Client Data](https://remix.run/docs/en/main/guides/client-data) for all of your data loads and mutations.
 
-To get started, run the Remix cli with this template
+## Setup
 
-```sh
-npx create-remix@latest --template vercel/vercel/examples/remix
-```
-
-## Deploy Your Own
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/remix&template=remix)
-
-_Live Example: https://remix-run-template.vercel.app_
-
-You can also deploy using the [Vercel CLI](https://vercel.com/cli):
-
-```sh
-npm i -g vercel
-vercel
+```shellscript
+npx create-remix@latest --template remix-run/remix/templates/spa
 ```
 
 ## Development
 
-To run your Remix app locally, make sure your project's local dependencies are installed:
+You can develop your SPA app just like you would a normal Remix app, via:
 
-```sh
-npm install
-```
-
-Afterwards, start the Remix development server like so:
-
-```sh
+```shellscript
 npm run dev
 ```
 
-Open up [http://localhost:3000](http://localhost:3000) and you should be ready to go!
+## Production
+
+When you are ready to build a production version of your app, `npm run build` will generate your assets and an `index.html` for the SPA.
+
+```shellscript
+npm run build
+```
+
+### Preview
+
+You can preview the build locally with [vite preview](https://vitejs.dev/guide/cli#vite-preview) to serve all routes via the single `index.html` file:
+
+```shellscript
+npm run preview
+```
+
+> [!IMPORTANT]
+>
+> `vite preview` is not designed for use as a production server
+
+### Deployment
+
+You can then serve your app from any HTTP server of your choosing. The server should be configured to serve multiple paths from a single root `/index.html` file (commonly called "SPA fallback"). Other steps may be required if the server doesn't directly support this functionality.
+
+For a simple example, you could use [sirv-cli](https://www.npmjs.com/package/sirv-cli):
+
+```shellscript
+npx sirv-cli build/client/ --single
+```
