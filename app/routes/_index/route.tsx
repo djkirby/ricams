@@ -10,7 +10,7 @@ export const LS_WORK_ADDRESS = "work-address";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
+    { title: "RI Cams" },
     { name: "description", content: "Welcome to Remix!" },
   ];
 };
